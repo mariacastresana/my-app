@@ -1,37 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Boton from "./components/Boton";
+import List from "./components/List";
+import Add from "./components/Add";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const items = [
+    { id: 1, name: "item1", price: 1 },
+    { id: 2, name: "item2", price: 2 },
+    { id: 3, name: "item3", price: 3 },
+  ];
+  let [count, setCount] = useState(0);
   const sum = () => {
-    setCount(count+1);
+    setCount(count + 1);
   };
-  const nombre= "Hugo Reyes"
-  const elemento= <h1>Hello, {nombre} </h1>
+  const resta = () => {
+    setCount(count - 1);
+  };
+  const add = (item) => {
+    item.id = items.length + 1;
+    items.push(item);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{count}</p>
-        <button onClick={sum}>add</button>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{elemento}</p>
-        <p>
-          <strong>hola </strong>
-          {2*5}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      {count}
+      <Boton name={"suma"} click={sum} />
+      <Boton click={resta} name={"resta"} />
+      <Boton name={"mensaje"} click={() => alert("hola")} />
+      <Add add={add} />
+      <List items={items} />
+      <Footer />
     </div>
   );
 }
